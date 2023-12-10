@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cargar y Mostrar Imagen en 4 Vistas</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-md-6">
+                <!-- Formulario para cargar la imagen -->
+                <form id="imageForm">
+                    <div class="mb-3">
+                        <label for="imageInput" class="form-label">Selecciona una imagen:</label>
+                        <input type="file" class="form-control" id="imageInput" accept="image/*">
+                    </div>
+                </form>
+                <!-- Botón para cargar la imagen -->
+                <button class="btn btn-primary" id="loadImageBtn">Cargar Imagen</button>
+            </div>
+            <div class="col-md-6">
+                <!-- Vistas previas de la imagen -->
+                <h4>Vista previa de la imagen:</h4>
+                <div class="mb-3">
+                    <img src="" alt="Vista previa 1" class="img-thumbnail" id="preview1">
+                    <a href="#" download="imagen1.jpg" id="downloadLink1" style="display: none;">Descargar</a>
+                    <label for="filtro1">Rotación:</label>
+                    <br><br>
+                </div>
+                <div class="mb-3">
+                    <img src="" alt="Vista previa 2" class="img-thumbnail" id="preview2">
+                    <a href="#" download="imagen2.jpg" id="downloadLink2" style="display: none;">Descargar</a>
+                    <label for="rotation">Rotación:</label>
+                    <br><br>
+                </div>
+                <div class="mb-3">
+                    <img src="" alt="Vista previa 3" class="img-thumbnail" id="preview3">
+                    <a href="#" download="imagen3.jpg" id="downloadLink3" style="display: none;">Descargar</a>
+                    <label for="rotation">Rotación:</label>
+                    <br><br>
+                </div>
+                <div class="mb-3">
+                    <img src="" alt="Vista previa 4" class="img-thumbnail" id="preview4">
+                    <a href="#" download="imagen4.jpg" id="downloadLink4" style="display: none;">Descargar</a>
+                    <label for="rotation">Rotación:</label>
+                    <br><br>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript para cargar y mostrar la imagen -->
+    <script>
+        document.getElementById('loadImageBtn').addEventListener('click', function () {
+            // Obtener el archivo seleccionado
+            const imageInput = document.getElementById('imageInput');
+            const file = imageInput.files[0];
+
+            if (file) {
+                // Crear un objeto FileReader para cargar la imagen
+                const reader = new FileReader();
+
+                // Función de devolución de llamada cuando la imagen se carga correctamente
+                reader.onload = function (e) {
+                    const imageSrc = e.target.result;
+                    
+                    // Mostrar la imagen en las vistas previas
+                    document.getElementById('preview1').src = imageSrc;
+                    document.getElementById('preview2').src = imageSrc;
+                    document.getElementById('preview3').src = imageSrc;
+                    document.getElementById('preview4').src = imageSrc;
+
+                    // Mostrar los enlaces de descarga
+                    document.getElementById('downloadLink1').style.display = 'block';
+                    document.getElementById('downloadLink2').style.display = 'block';
+                    document.getElementById('downloadLink3').style.display = 'block';
+                    document.getElementById('downloadLink4').style.display = 'block';
+
+                    // Establecer el atributo 'href' de los enlaces de descarga
+                    document.getElementById('downloadLink1').href = imageSrc;
+                    document.getElementById('downloadLink2').href = imageSrc;
+                    document.getElementById('downloadLink3').href = imageSrc;
+                    document.getElementById('downloadLink4').href = imageSrc;
+                };
+
+                // Leer el archivo como una URL de datos
+                reader.readAsDataURL(file);
+            }
+        });
+    </script>
+</body>
+</html>
